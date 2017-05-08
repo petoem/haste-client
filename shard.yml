@@ -1,0 +1,13 @@
+name: haste
+version: 0.1.0
+
+authors:
+  - Michael Petö <michael@petoe.me>
+
+targets:
+  haste:
+    main: src/haste.cr
+
+crystal: 0.22.0
+
+license: MIT
