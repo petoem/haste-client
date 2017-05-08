@@ -1,6 +1,10 @@
 # haste client
 CLI client for haste-server written in crystal based on [haste-client](https://github.com/seejohnrun/haste-client).
 
+[![GitHub release](https://img.shields.io/github/release/petoem/haste-client.svg?style=flat-square)](https://github.com/petoem/haste-client/releases)
+[![Travis](https://img.shields.io/travis/petoem/haste-client.svg?style=flat-square)](https://travis-ci.org/petoem/haste-client)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/petoem/haste-client/blob/master/LICENSE)  
+
 haste is a client for uploading data to haste-server. All you have to do is pipe data into STDIN:
 
 `cat file | haste`
