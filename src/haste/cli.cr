@@ -1,25 +1,30 @@
+require "option_parser"
+
 module Haste
   class CLI
-    # Create a new uploader
     def initialize
       @uploader = Uploader.new ENV["HASTE_SERVER"]?
+      @raw = false
     end
 
-    # And then handle the basic usage
     def start
-      # Take data in
-      if STDIN.tty?
-        key = @uploader.upload_path ARGV.first
-      else
-        key = @uploader.upload_raw STDIN.gets_to_end
+      OptionParser.parse! do |parser|
+        parser.banner = "Usage: haste [filename] [arguments]"
+        parser.on("-r", "--raw", "Prints URL to plain/text file") { @raw = true }
+        parser.on("-h", "--help", "Show this help") do
+          puts parser
+          exit
+        end
+        parser.unknown_args { |unknown_args| @uploader.upload_path unknown_args[0] unless unknown_args.empty? }
       end
-      # Put together a URL
-      if ARGV.includes?("--raw")
-        url = "#{@uploader.server_url}/raw/#{key}"
-      else
-        url = "#{@uploader.server_url}/#{key}"
+      unless STDIN.tty?
+        @uploader.upload_raw STDIN.gets_to_end
       end
-      # And write data out
+      if @raw
+        url = "#{@uploader.server_url}/raw/#{@uploader.key}"
+      else
+        url = "#{@uploader.server_url}/#{@uploader.key}"
+      end
       if STDOUT.tty?
         STDOUT.puts url
       else
