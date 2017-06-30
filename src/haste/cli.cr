@@ -11,6 +11,10 @@ module Haste
       OptionParser.parse! do |parser|
         parser.banner = "Usage: haste [filename] [arguments]"
         parser.on("-r", "--raw", "Prints URL to plain/text file") { @raw = true }
+        parser.on("-v", "--version", "Print haste-client version") do
+          puts VERSION
+          exit
+        end
         parser.on("-h", "--help", "Show this help") do
           puts parser
           exit
