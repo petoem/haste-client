@@ -1,7 +1,6 @@
 language: crystal
 crystal:
   - latest
-  - nightly
 notifications:
   email:
     on_success: never
