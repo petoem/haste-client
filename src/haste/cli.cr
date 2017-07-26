@@ -24,6 +24,10 @@ module Haste
       unless STDIN.tty?
         @uploader.upload_raw STDIN.gets_to_end
       end
+      unless @uploader.key
+        puts "Invalid arguments, use --help for usage information."
+        exit
+      end
       if @raw
         url = "#{@uploader.server_url}/raw/#{@uploader.key}"
       else
