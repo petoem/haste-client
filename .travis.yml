@@ -3,7 +3,7 @@ crystal:
   - latest
 before_deploy:
   - mkdir bin
-  - crystal build src/haste.cr --release --stats --progress --static --no-debug -o bin/haste
+  - crystal build src/haste.cr --release --stats --progress --no-debug -o bin/haste
   - tar -zcvf haste-client-$TRAVIS_TAG-linux-x86_64.tar.gz bin/haste
 deploy:
   provider: releases
