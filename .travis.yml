@@ -5,11 +5,7 @@ services:
   - docker
 before_deploy:
   - mkdir bin
-  - |
-    cat >> src/haste.cr <<EOF
-    require "llvm/lib_llvm"
-    require "llvm/enums"
-    EOF
+  - echo -e 'require "llvm/lib_llvm"\nrequire "llvm/enums"\n' >> src/haste.cr
   - docker run --rm -it -v $PWD:/haste-client -w /haste-client jrei/crystal-alpine crystal build src/haste.cr --static --release --stats --progress -o bin/haste
   - tar -zcvf haste-client-$TRAVIS_TAG-linux-x86_64.tar.gz bin/haste
 deploy:
